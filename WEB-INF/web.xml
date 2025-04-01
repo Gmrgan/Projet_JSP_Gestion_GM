@@ -4,8 +4,8 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
     version="2.4">
 
-  <display-name>Mini Gestionnaire de Tâches</display-name>
-    <description>Une application pour gérer ses tâches.</description>
+    <display-name>Gestionnaire de Tâches</display-name>
+    <description>Une application de gestion de tâches avec JSP et Servlets.</description>
 
     <servlet>
         <servlet-name>TaskServlet</servlet-name>
@@ -15,6 +15,12 @@
     <servlet-mapping>
         <servlet-name>TaskServlet</servlet-name>
         <url-pattern>/tasks</url-pattern>
+    </servlet-mapping>
+
+    <!-- Configuration pour servir les fichiers statiques -->
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/styles.css</url-pattern>
     </servlet-mapping>
 
     <welcome-file-list>
