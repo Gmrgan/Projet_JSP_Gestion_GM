@@ -7,7 +7,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - run: |
-          jar cvf giraud.war *
+          jar cvf giraud.war -C webapp/ . -C WEB-INF/ .
     - name: copy file via ssh password
       uses: appleboy/scp-action@master
       with:
