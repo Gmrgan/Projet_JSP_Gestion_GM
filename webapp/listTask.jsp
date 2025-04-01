@@ -26,6 +26,11 @@
                     <input type="hidden" name="index" value="<%= i %>">
                     <button type="submit" class="delete-btn">Supprimer</button>
                 </form>
+                <form action="tasks" method="post" style="display:inline;">
+                    <input type="hidden" name="action" value="complete">
+                    <input type="hidden" name="index" value="<%= i %>">
+                    <button type="submit" class="complete-btn">Terminer</button>
+                </form>
             </div>
         <%
                 }
