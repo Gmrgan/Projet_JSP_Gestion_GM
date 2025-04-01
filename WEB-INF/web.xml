@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <web-app xmlns="http://java.sun.com/xml/ns/j2ee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
-    version="2.4">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+         version="2.4">
 
     <display-name>Gestionnaire de Tâches</display-name>
     <description>Une application de gestion de tâches avec JSP et Servlets.</description>
 
+    <!-- Définition du Servlet pour gérer les tâches -->
     <servlet>
         <servlet-name>TaskServlet</servlet-name>
         <servlet-class>controllers.TaskServlet</servlet-class>
@@ -14,15 +15,59 @@
 
     <servlet-mapping>
         <servlet-name>TaskServlet</servlet-name>
+        <!-- URL pattern pour la gestion des tâches -->
         <url-pattern>/tasks</url-pattern>
     </servlet-mapping>
 
-    <!-- Configuration pour servir les fichiers statiques -->
+    <!-- Configuration pour afficher la liste des tâches -->
+    <servlet>
+        <servlet-name>ListTasksServlet</servlet-name>
+        <servlet-class>controllers.TaskServlet</servlet-class>
+    </servlet>
+
     <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>/styles.css</url-pattern>
+        <servlet-name>ListTasksServlet</servlet-name>
+        <!-- URL pattern pour afficher toutes les tâches -->
+        <url-pattern>/listTasks</url-pattern>
     </servlet-mapping>
 
+    <!-- Configuration pour ajouter une tâche -->
+    <servlet>
+        <servlet-name>AddTaskServlet</servlet-name>
+        <servlet-class>controllers.TaskServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddTaskServlet</servlet-name>
+        <!-- URL pattern pour ajouter une nouvelle tâche -->
+        <url-pattern>/addTask</url-pattern>
+    </servlet-mapping>
+
+    <!-- Configuration pour la suppression d'une tâche -->
+    <servlet>
+        <servlet-name>DeleteTaskServlet</servlet-name>
+        <servlet-class>controllers.TaskServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteTaskServlet</servlet-name>
+        <!-- URL pattern pour supprimer une tâche -->
+        <url-pattern>/deleteTask</url-pattern>
+    </servlet-mapping>
+
+    <!-- Configuration pour marquer une tâche comme terminée -->
+    <servlet>
+        <servlet-name>CompleteTaskServlet</servlet-name>
+        <servlet-class>controllers.TaskServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CompleteTaskServlet</servlet-name>
+        <!-- URL pattern pour marquer une tâche comme terminée -->
+        <url-pattern>/completeTask</url-pattern>
+    </servlet-mapping>
+
+    <!-- Page d'accueil (index.jsp) -->
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
