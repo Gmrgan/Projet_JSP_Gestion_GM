@@ -1,32 +1,41 @@
 package controllers;
 
 import models.Task;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+@WebServlet("/tasks")
 public class TaskServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        List<Task> taskList = (List<Task>) session.getAttribute("tasks");
+        ArrayList<Task> tasks = (ArrayList<Task>) session.getAttribute("tasks");
 
-        if (taskList == null) {
-            taskList = new ArrayList<>();
+        if (tasks == null) {
+            tasks = new ArrayList<>();
+            session.setAttribute("tasks", tasks);
         }
 
-        String title = request.getParameter("title");
-        String description = request.getParameter("description");
-        LocalDate dueDate = LocalDate.parse(request.getParameter("dueDate"));
+        String action = request.getParameter("action");
 
-        taskList.add(new Task(title, description, dueDate));
-        session.setAttribute("tasks", taskList);
+        if ("add".equals(action)) {
+            // Ajout d'une tâche
+            String title = request.getParameter("title");
+            String description = request.getParameter("description");
+            String dueDate = request.getParameter("dueDate");
+            tasks.add(new Task(title, description, dueDate, false));
+        } else if ("delete".equals(action)) {
+            // Suppression d'une tâche
+            int index = Integer.parseInt(request.getParameter("index"));
+            if (index >= 0 && index < tasks.size()) {
+                tasks.remove(index);
+            }
+        }
 
         response.sendRedirect("listTasks.jsp");
     }
