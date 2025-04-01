@@ -35,6 +35,13 @@ public class TaskServlet extends HttpServlet {
             if (index >= 0 && index < tasks.size()) {
                 tasks.remove(index);
             }
+        } else if ("complete".equals(action)) {
+            // Marquer une tâche comme terminée
+            int index = Integer.parseInt(request.getParameter("index"));
+            if (index >= 0 && index < tasks.size()) {
+                tasks.get(index).setCompleted(true);
+            }
+        }    
         }
 
         response.sendRedirect("listTasks.jsp");
