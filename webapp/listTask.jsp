@@ -14,12 +14,18 @@
         <%
             List<Task> tasks = (List<Task>) session.getAttribute("tasks");
             if (tasks != null && !tasks.isEmpty()) {
-                for (Task task : tasks) {
+                for (int i = 0; i < tasks.size(); i++) {
+                    Task task = tasks.get(i);
         %>
             <div class="task <%= task.isCompleted() ? "completed" : "" %>">
                 <h3><%= task.getTitle() %></h3>
                 <p><%= task.getDescription() %></p>
                 <p>Échéance : <%= task.getDueDate() %></p>
+                <form action="tasks" method="post" style="display:inline;">
+                    <input type="hidden" name="action" value="delete">
+                    <input type="hidden" name="index" value="<%= i %>">
+                    <button type="submit" class="delete-btn">Supprimer</button>
+                </form>
             </div>
         <%
                 }
